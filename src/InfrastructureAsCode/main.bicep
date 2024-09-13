@@ -24,6 +24,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
   sku: {
     name: sku // Using the sku variable here
     tier: 'Standard'
+    amount: 1
   }
   properties: {
     reserved: true // If you need Linux based App Service Plan
