@@ -15,7 +15,6 @@ var registrySku = 'Standard'
 var imageName = 'techexcel/dotnetcoreapp'
 var startupCommand = ''
 var theLocation = '${location}'
-var acrName string
 
 // TODO: complete this script
 // App Service Plan
@@ -53,7 +52,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
 
 // Azure Container Registry
 resource acr 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
-  name: acrName
+  name: registryName
   location: location
   sku: {
     name: 'Basic'
