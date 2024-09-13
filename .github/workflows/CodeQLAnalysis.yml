@@ -26,5 +26,8 @@ jobs:
       with:
         languages: ${{ matrix.language }}
     
+    - name: Build C# project
+      run: dotnet build /p:UseSharedCompilation=false
+  
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
