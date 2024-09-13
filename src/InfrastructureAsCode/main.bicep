@@ -9,7 +9,7 @@ var webAppName = '${uniqueString(resourceGroup().id)}-${environment}'
 var appServicePlanName = '${uniqueString(resourceGroup().id)}-mpnp-asp'
 var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la'
 var appInsightsName = '${uniqueString(resourceGroup().id)}-mpnp-ai'
-var sku = 'S'
+var sku = 'B'
 var registryName = '${uniqueString(resourceGroup().id)}mpnpreg'
 var registrySku = 'Standard'
 var imageName = 'techexcel/dotnetcoreapp'
@@ -55,7 +55,7 @@ resource acr 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
   name: registryName
   location: location
   sku: {
-    name: 'Basic'
+    name: registrySku
   }
   properties: {
     adminUserEnabled: true
