@@ -1,7 +1,8 @@
 name: .NET CI
 
 env:
-  registryName: {your_registry_name}.azurecr.io
+  registryNameBase: '${uniqueString(resourceGroup().id)}mpnpreg'
+  registryName: registryName1.azurecr.io
   repositoryName: techexcel/dotnetcoreapp
   dockerFolderPath: ./src/Application/src/RazorPagesTestSample
   tag: ${{github.run_number}}
@@ -19,7 +20,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+      
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -78,7 +79,7 @@ jobs:
       - uses: azure/webapps-deploy@v2
         with:
           app-name: '{your_prefix}-dev'
-          images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+          images: registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-test:
   
@@ -99,7 +100,7 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: '{your_prefix}-test'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        images: registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
 
   deploy-to-prod:
   
@@ -120,4 +121,4 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: '{your_prefix}-prod'
-        images: {your_registry_name}.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
+        images: registryName.azurecr.io/techexcel/dotnetcoreapp:${{github.run_number}}
