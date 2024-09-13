@@ -62,3 +62,15 @@ resource acr 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
     adminUserEnabled: true
   }
 }
+
+// Log Analytics Workspace
+resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2021-06-01' = {
+  name: logAnalyticsName
+  location: location
+  properties: {
+    sku: {
+      name: 'PerGB2018'
+    }
+    retentionInDays: 30
+  }
+}
