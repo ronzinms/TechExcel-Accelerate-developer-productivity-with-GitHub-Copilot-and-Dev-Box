@@ -9,7 +9,7 @@ var webAppName = '${uniqueString(resourceGroup().id)}-${environment}'
 var appServicePlanName = '${uniqueString(resourceGroup().id)}-mpnp-asp'
 var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la'
 var appInsightsName = '${uniqueString(resourceGroup().id)}-mpnp-ai'
-var sku = 'F1'
+var sku = 'P0v2'
 var registryName = '${uniqueString(resourceGroup().id)}mpnpreg'
 var registrySku = 'Standard'
 var imageName = 'techexcel/dotnetcoreapp'
@@ -23,7 +23,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
   location: location
   sku: {
     name: sku // Using the sku variable here
-    tier: 'Free'
+    capacity: 1
   }
   properties: {
     reserved: true // If you need Linux based App Service Plan
