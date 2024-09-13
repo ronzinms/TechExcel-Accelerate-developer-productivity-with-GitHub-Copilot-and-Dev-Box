@@ -14,13 +14,13 @@ var registryName = '${uniqueString(resourceGroup().id)}mpnpreg'
 var registrySku = 'Standard'
 // var imageName = 'techexcel/dotnetcoreapp'
 // var startupCommand = ''
-// var theLocation = '${location}'
+var theLocation = '${location}'
 
 // TODO: complete this script
 // App Service Plan
 resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
   name: appServicePlanName
-  location: location
+  location: theLocation
   sku: {
     name: sku // Using the sku variable here
     capacity: 1
