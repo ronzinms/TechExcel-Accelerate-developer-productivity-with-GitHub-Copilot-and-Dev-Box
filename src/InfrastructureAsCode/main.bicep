@@ -13,8 +13,8 @@ var sku = 'P0v2'
 var registryName = '${uniqueString(resourceGroup().id)}mpnpreg'
 var registrySku = 'Standard'
 // var imageName = 'techexcel/dotnetcoreapp'
-var startupCommand = ''
-var theLocation = '${location}'
+// var startupCommand = ''
+// var theLocation = '${location}'
 
 // TODO: complete this script
 // App Service Plan
