@@ -4,6 +4,7 @@ param environment string = 'dev'
 @description('Location of services')
 param location string = resourceGroup().location
 
+
 var webAppName = '${uniqueString(resourceGroup().id)}-${environment}'
 var appServicePlanName = '${uniqueString(resourceGroup().id)}-mpnp-asp'
 var logAnalyticsName = '${uniqueString(resourceGroup().id)}-mpnp-la'
@@ -14,5 +15,50 @@ var registrySku = 'Standard'
 var imageName = 'techexcel/dotnetcoreapp'
 var startupCommand = ''
 var theLocation = '${location}'
+var acrName string
 
 // TODO: complete this script
+// App Service Plan
+resource appServicePlan 'Microsoft.Web/serverfarms@2021-02-01' = {
+  name: appServicePlanName
+  location: location
+  sku: {
+    name: 'F1' // Free tier
+    tier: 'Free'
+  }
+  properties: {
+    reserved: true // If you need Linux based App Service Plan
+  }
+}
+
+// Web App
+resource webApp 'Microsoft.Web/sites@2021-02-01' = {
+  name: webAppName
+  location: location
+  properties: {
+    serverFarmId: appServicePlan.id
+    httpsOnly: true
+  }
+}
+
+// Application Insights
+resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: appInsightsName
+  location: location
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+  }
+}
+
+// Azure Container Registry
+resource acr 'Microsoft.ContainerRegistry/registries@2021-09-01' = {
+  name: acrName
+  location: location
+  sku: {
+    name: 'Basic'
+  }
+  properties: {
+    adminUserEnabled: true
+  }
+}
